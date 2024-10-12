@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf3agueqihfyp"]
+
+[ext_resource type="Texture2D" uid="uid://qcphw7hoa3fl" path="res://assets/bg.png" id="1_nbgty"]
+[ext_resource type="PackedScene" uid="uid://bn05lc5ur73r" path="res://scenes/player/player.tscn" id="2_i166f"]
+[ext_resource type="PackedScene" uid="uid://ycehx4m8we53" path="res://scenes/spawner/spawner_with_gizmo.tscn" id="3_i166f"]
+[ext_resource type="PackedScene" uid="uid://34btvu720bkf" path="res://scenes/chest/chest.tscn" id="3_qkmgm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbgty"]
+size = Vector2(27, 271.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i166f"]
+size = Vector2(479.844, 21)
+
+[node name="Level" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(244.197, 134.32)
+scale = Vector2(0.606094, 0.360174)
+texture = ExtResource("1_nbgty")
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+
+[node name="LeftBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(-13, 135.625)
+shape = SubResource("RectangleShape2D_nbgty")
+debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
+
+[node name="RightBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(494, 135.75)
+shape = SubResource("RectangleShape2D_nbgty")
+debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
+
+[node name="UpBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(240, -10)
+shape = SubResource("RectangleShape2D_i166f")
+debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
+
+[node name="BottomBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
+position = Vector2(240.078, 280.5)
+shape = SubResource("RectangleShape2D_i166f")
+debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
+
+[node name="Spawner" parent="." instance=ExtResource("3_i166f")]
+position = Vector2(351, 120)
+loading_scene = ExtResource("3_qkmgm")
+radius = 100.0
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("2_i166f")]
+position = Vector2(203, 117)
+speed = 100.0
