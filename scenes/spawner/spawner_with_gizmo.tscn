@@ -1,14 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ycehx4m8we53"]
+[gd_scene load_steps=2 format=3 uid="uid://ycehx4m8we53"]
 
 [ext_resource type="Script" path="res://scenes/spawner/gizmo_spawner.gd" id="1_gobpk"]
-[ext_resource type="Script" path="res://scenes/spawner/spawner.gd" id="2_2r8wa"]
 
-[node name="GizmoSpawner" type="Node2D"]
+[node name="Spawner" type="Node2D"]
 script = ExtResource("1_gobpk")
-
-[node name="Spawner" type="Node2D" parent="."]
-script = ExtResource("2_2r8wa")
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

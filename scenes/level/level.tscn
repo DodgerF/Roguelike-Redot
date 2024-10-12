@@ -43,7 +43,7 @@ shape = SubResource("RectangleShape2D_i166f")
 debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
 
 [node name="Spawner" parent="." instance=ExtResource("3_i166f")]
-position = Vector2(351, 120)
+position = Vector2(347, 125)
 loading_scene = ExtResource("3_qkmgm")
 radius = 100.0
 autostart = true
