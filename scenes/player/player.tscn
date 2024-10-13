@@ -1,25 +1,109 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn05lc5ur73r"]
+[gd_scene load_steps=12 format=3 uid="uid://bn05lc5ur73r"]
 
 [ext_resource type="Texture2D" uid="uid://ca5a4m7ynf3a5" path="res://assets/Prototype_Character.png" id="1_3vyb7"]
 [ext_resource type="Script" path="res://scenes/player/scripts/input_checker.gd" id="1_g2els"]
 [ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_gmlin"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(10, 9, 12, 14)
+[ext_resource type="PackedScene" uid="uid://c2nxkjmgwgdbs" path="res://scenes/weapon/weapon.tscn" id="4_lvxji"]
+[ext_resource type="Script" path="res://scenes/player/animation_player.gd" id="5_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(8, 14)
+
+[sub_resource type="Animation" id="Animation_lvxji"]
+resource_name = "walk_down"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.01, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_p47bc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_75vfm"]
+resource_name = "walk_up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_0owmy"]
+resource_name = "walk_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("View:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 4), Vector2i(1, 4), Vector2i(2, 4), Vector2i(3, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qek5x"]
+_data = {
+&"RESET": SubResource("Animation_p47bc"),
+&"walk_down": SubResource("Animation_lvxji"),
+&"walk_right": SubResource("Animation_0owmy"),
+&"walk_up": SubResource("Animation_75vfm")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 14
 script = ExtResource("1_gmlin")
 
 [node name="View" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_g2els")
+texture = ExtResource("1_3vyb7")
+hframes = 4
+vframes = 12
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="InputChecker" type="Node2D" parent="."]
 script = ExtResource("1_g2els")
+
+[node name="Weapon" parent="." instance=ExtResource("4_lvxji")]
+position = Vector2(7, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qek5x")
+}
+script = ExtResource("5_p47bc")
