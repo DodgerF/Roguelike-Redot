@@ -21,6 +21,8 @@ texture = ExtResource("1_nbgty")
 [node name="Borders" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
+collision_layer = 2
+collision_mask = 13
 
 [node name="LeftBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
 position = Vector2(-13, 135.625)
@@ -46,8 +48,8 @@ debug_color = Color(0.242179, 0.622083, 0.39104, 0.42)
 position = Vector2(347, 125)
 loading_scene = ExtResource("3_qkmgm")
 radius = 100.0
+one_shot = true
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_i166f")]
 position = Vector2(203, 117)
-speed = 100.0

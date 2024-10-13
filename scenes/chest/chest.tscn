@@ -7,6 +7,8 @@
 size = Vector2(10.5, 9.5)
 
 [node name="Chest" type="Area2D"]
+collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_uih34")
 
 [node name="View" type="Sprite2D" parent="."]

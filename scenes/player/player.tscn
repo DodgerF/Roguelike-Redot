@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn05lc5ur73r"]
+[gd_scene load_steps=6 format=3 uid="uid://bn05lc5ur73r"]
 
-[ext_resource type="Texture2D" uid="uid://ca5a4m7ynf3a5" path="res://Prototype_Character.png" id="1_3vyb7"]
-[ext_resource type="Script" path="res://scenes/player/scripts/player_mover.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://ca5a4m7ynf3a5" path="res://assets/Prototype_Character.png" id="1_3vyb7"]
+[ext_resource type="Script" path="res://scenes/player/scripts/input_checker.gd" id="1_g2els"]
+[ext_resource type="Script" path="res://scenes/player/scripts/player.gd" id="1_gmlin"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -11,10 +12,14 @@ region = Rect2(10, 9, 12, 14)
 size = Vector2(8, 14)
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_g2els")
+collision_mask = 14
+script = ExtResource("1_gmlin")
 
 [node name="View" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g2els")
+
+[node name="InputChecker" type="Node2D" parent="."]
+script = ExtResource("1_g2els")
