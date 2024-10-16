@@ -2,12 +2,17 @@ extends Area2D
 class_name Weapon
 
 const INDENTATION = 7
+var anim_time := 0.3
 var collision: CollisionShape2D
 
 func _ready() -> void:
 	collision = FromUnity.find_node_in_children(self, CollisionShape2D)
-	print(collision)
 	collision.disabled = true
+	
+	get_parent().attack.connect(attack)
+
+func _exit_tree() -> void:
+	get_parent().attack.disconnect(attack)
 
 func attack(direction: Vector2) -> void:
 	position = direction * INDENTATION
@@ -15,15 +20,10 @@ func attack(direction: Vector2) -> void:
 	
 	show()
 	collision.disabled = false
-
-func stop_attack() -> void:
+	
+	await get_tree().create_timer(anim_time).timeout
 	hide()
 	collision.disabled = true
-
-
-#func _on_body_entered(body: Node2D) -> void:
-	#if body is Chest:
-		#body.queue_free()
 
 
 func _on_area_entered(area: Area2D) -> void:
